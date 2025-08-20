@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'com.github.diskursmonger'
@@ -10,8 +12,23 @@ repositories {
 }
 
 dependencies {
+    implementation 'info.picocli:picocli:4.7.7'
+    annotationProcessor 'info.picocli:picocli-codegen:4.7.7'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
+}
+
+application {
+    mainClass = 'com.github.diskursmonger.Main'
+}
+
+shadowJar {
+    archiveBaseName.set('util')
+    archiveVersion.set('')
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': application.mainClass.get()
+    }
 }
 
 test {
