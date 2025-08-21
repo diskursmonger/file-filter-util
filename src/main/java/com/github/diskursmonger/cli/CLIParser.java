@@ -13,7 +13,7 @@ public final class CLIParser {
     @Option(names = "-o", description = "Output path")
     Path outputPath;
 
-    @Option(names = "-p", description = "Prefix for output files", required = true)
+    @Option(names = "-p", description = "Prefix for output files")
     String prefix;
 
     @Option(names = "-a", description = "Append to existing output files")
