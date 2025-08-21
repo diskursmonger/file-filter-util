@@ -28,10 +28,12 @@ public final class CLIParser {
     @Parameters(arity = "1..*", description = "Input files")
     List<Path> inputFiles;
 
-    public AppConfig parse() {
+    public AppConfig toConfig() {
+        Path path = (outputPath != null) ? outputPath : Path.of(System.getProperty("user.dir"));
+        String pref = (prefix != null) ? prefix : "";
         return new AppConfig(
-                outputPath,
-                prefix,
+                path,
+                pref,
                 append,
                 shortStatistics,
                 fullStatistics,
