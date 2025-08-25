@@ -1,4 +1,4 @@
-package com.github.diskursmonger.domain.validate;
+package com.github.diskursmonger.domain.validation;
 
 import java.util.List;
 import java.util.regex.Pattern;

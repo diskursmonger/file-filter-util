@@ -1,14 +1,21 @@
-package com.github.diskursmonger.domain.validate;
+package com.github.diskursmonger.domain.validation;
 
+import com.github.diskursmonger.domain.AppConfig;
 import com.github.diskursmonger.domain.exception.ValidationException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class OutputPathValidator {
+public class OutputPathValidator implements Validator {
 
-    public static void validate(Path outputPath) {
-        Path simplified = outputPath.normalize();
+    @Override
+    public void validate(AppConfig config) {
+        var outputPath = config.outputPath();
+
+        if (outputPath == null) {
+            throw new ValidationException("Output path is null.");
+        }
+        var simplified = outputPath.normalize();
         validatePathNames(simplified);
         if (Files.exists(simplified)) {
             if (!Files.isDirectory(simplified)) {
@@ -20,12 +27,12 @@ public class OutputPathValidator {
             return;
         }
 
-        Path existing = simplified.getParent();
+        var existing = simplified.getParent();
         if (existing == null) {
             existing = Path.of(System.getProperty("user.dir"));
         }
 
-        boolean found = false;
+        var found = false;
 
         while (existing != null && !found) {
             if (Files.exists(existing)) {
@@ -48,7 +55,7 @@ public class OutputPathValidator {
     }
 
     private static void validatePathNames(Path path) {
-        for (Path folder : path) {
+        for (var folder : path) {
             String name = folder.toString();
             validateFolderName(name);
         }

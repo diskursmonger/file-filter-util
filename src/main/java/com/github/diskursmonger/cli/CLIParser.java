@@ -29,8 +29,8 @@ public final class CLIParser {
     List<Path> inputFiles;
 
     public AppConfig toConfig() {
-        Path path = (outputPath != null) ? outputPath : Path.of(System.getProperty("user.dir"));
-        String pref = (prefix != null) ? prefix : "";
+        var path = (outputPath != null) ? outputPath : Path.of(System.getProperty("user.dir"));
+        var pref = (prefix != null) ? prefix : "";
         return new AppConfig(
                 path,
                 pref,
