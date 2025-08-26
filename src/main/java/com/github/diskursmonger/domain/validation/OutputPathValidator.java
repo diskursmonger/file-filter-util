@@ -12,22 +12,19 @@ public class OutputPathValidator implements Validator {
     public void validate(AppConfig config) {
         var outputPath = config.outputPath();
 
-        if (outputPath == null) {
-            throw new ValidationException("Output path is null.");
-        }
-        var simplified = outputPath.normalize();
-        validatePathNames(simplified);
-        if (Files.exists(simplified)) {
-            if (!Files.isDirectory(simplified)) {
+        validatePathNames(outputPath);
+
+        if (Files.exists(outputPath)) {
+            if (!Files.isDirectory(outputPath)) {
                 throw new ValidationException("Output path points to a file: " + outputPath);
             }
-            if (!Files.isWritable(simplified)) {
+            if (!Files.isWritable(outputPath)) {
                 throw new ValidationException("Output directory is not writable: " + outputPath);
             }
             return;
         }
 
-        var existing = simplified.getParent();
+        var existing = outputPath.getParent();
         if (existing == null) {
             existing = Path.of(System.getProperty("user.dir"));
         }
@@ -63,21 +60,13 @@ public class OutputPathValidator implements Validator {
 
     private static void validateFolderName(String name) {
         if (FileNameRules.isWindows()) {
-            if (FileNameRules.illegalCharsPattern().matcher(name).find()) {
-                throw new ValidationException("Invalid folder name.");
-            }
-            if (name.endsWith(" ") || name.endsWith(".")) {
-                throw new ValidationException("Invalid folder name.");
-            }
-            if (FileNameRules.isReservedName(name.toUpperCase())) {
-                throw new ValidationException("Invalid folder name.");
-            }
-        } else {
-            if (FileNameRules.illegalCharsPattern().matcher(name).find()) {
+            if (name.endsWith(" ") || name.endsWith(".") || FileNameRules.isReservedName(name.toUpperCase())) {
                 throw new ValidationException("Invalid folder name.");
             }
         }
-
+        if (FileNameRules.illegalCharsPattern().matcher(name).find()) {
+            throw new ValidationException("Invalid folder name.");
+        }
         if (name.length() > 255) {
             throw new ValidationException("Output folder name too long.");
         }

@@ -6,6 +6,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 @CommandLine.Command(name = "util", mixinStandardHelpOptions = true)
@@ -31,13 +32,19 @@ public final class CLIParser {
     public AppConfig toConfig() {
         var path = (outputPath != null) ? outputPath : Path.of(System.getProperty("user.dir"));
         var pref = (prefix != null) ? prefix : "";
+
+        var inputFilesNormalized = new ArrayList<Path>();
+        for (var inputFile : inputFiles) {
+            inputFilesNormalized.add(inputFile.toAbsolutePath().normalize());
+        }
+
         return new AppConfig(
-                path,
+                path.toAbsolutePath().normalize(),
                 pref,
                 append,
                 shortStatistics,
                 fullStatistics,
-                inputFiles
+                inputFilesNormalized
         );
     }
 }
