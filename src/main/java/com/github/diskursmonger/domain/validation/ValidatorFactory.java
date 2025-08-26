@@ -7,7 +7,8 @@ public class ValidatorFactory {
         return List.of(
                 new InputFilesValidator(),
                 new OutputPathValidator(),
-                new PrefixValidator()
+                new PrefixValidator(),
+                new IOConflictValidator()
         );
     }
 }
