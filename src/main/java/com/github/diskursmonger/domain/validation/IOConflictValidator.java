@@ -1,6 +1,6 @@
 package com.github.diskursmonger.domain.validation;
 
-import com.github.diskursmonger.domain.AppConfig;
+import com.github.diskursmonger.domain.config.AppConfig;
 import com.github.diskursmonger.domain.exception.ValidationException;
 
 public class IOConflictValidator implements Validator {

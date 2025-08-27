@@ -1,4 +1,4 @@
-package com.github.diskursmonger.domain;
+package com.github.diskursmonger.domain.config;
 
 public enum StatisticsMode {
     NONE,

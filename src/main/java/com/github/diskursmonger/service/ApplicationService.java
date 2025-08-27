@@ -1,7 +1,7 @@
 package com.github.diskursmonger.service;
 
 import com.github.diskursmonger.cli.CLIParser;
-import com.github.diskursmonger.domain.AppConfig;
+import com.github.diskursmonger.domain.config.AppConfig;
 import com.github.diskursmonger.domain.exception.ValidationException;
 import com.github.diskursmonger.domain.validation.ValidatorFactory;
 import picocli.CommandLine;

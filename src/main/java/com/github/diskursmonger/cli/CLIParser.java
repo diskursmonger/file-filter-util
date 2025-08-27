@@ -1,7 +1,7 @@
 package com.github.diskursmonger.cli;
 
-import com.github.diskursmonger.domain.AppConfig;
-import com.github.diskursmonger.domain.StatisticsMode;
+import com.github.diskursmonger.domain.config.AppConfig;
+import com.github.diskursmonger.domain.config.StatisticsMode;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;

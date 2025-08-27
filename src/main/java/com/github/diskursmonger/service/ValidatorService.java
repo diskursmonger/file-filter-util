@@ -1,6 +1,6 @@
 package com.github.diskursmonger.service;
 
-import com.github.diskursmonger.domain.AppConfig;
+import com.github.diskursmonger.domain.config.AppConfig;
 import com.github.diskursmonger.domain.validation.Validator;
 
 import java.util.List;
