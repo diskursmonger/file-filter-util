@@ -44,18 +44,11 @@ public final class CLIParser {
             inputFilesNormalized.add(inputFile.toAbsolutePath().normalize());
         }
 
-        var integers = path.resolve(prefix + "integers.txt");
-        var floats = path.resolve(prefix + "floats.txt");
-        var strings = path.resolve(prefix + "strings.txt");
-
         StatisticsMode statisticsMode = statisticsFlags.shortStatistics ? StatisticsMode.SHORT :
                 statisticsFlags.fullStatistics ? StatisticsMode.FULL : StatisticsMode.NONE;
 
         return new AppConfig(
                 path,
-                integers,
-                floats,
-                strings,
                 pref,
                 append,
                 statisticsMode,
