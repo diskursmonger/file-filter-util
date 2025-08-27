@@ -1,7 +1,6 @@
 package com.github.diskursmonger.domain.validation;
 
 import com.github.diskursmonger.domain.AppConfig;
-import com.github.diskursmonger.domain.config.OutputPaths;
 import com.github.diskursmonger.domain.exception.ValidationException;
 
 public class IOConflictValidator implements Validator {
@@ -11,9 +10,9 @@ public class IOConflictValidator implements Validator {
         var inputFiles = appConfig.inputFiles();
 
         for (var inputFile : inputFiles) {
-            if (inputFile.equals(OutputPaths.getPathIntegers()) ||
-                    inputFile.equals(OutputPaths.getPathFloats()) ||
-                    inputFile.equals(OutputPaths.getPathStrings())
+            if (inputFile.equals(appConfig.integers()) ||
+                    inputFile.equals(appConfig.floats()) ||
+                    inputFile.equals(appConfig.strings())
             ) {
                 throw new ValidationException("Input file and output file are the same: " + inputFile);
             }
