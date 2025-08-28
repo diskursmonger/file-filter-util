@@ -1,4 +1,4 @@
-package com.github.diskursmonger.service;
+package com.github.diskursmonger.app;
 
 import com.github.diskursmonger.domain.config.AppConfig;
 import com.github.diskursmonger.domain.validation.Validator;

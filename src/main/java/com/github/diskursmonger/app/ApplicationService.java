@@ -1,9 +1,10 @@
-package com.github.diskursmonger.service;
+package com.github.diskursmonger.app;
 
 import com.github.diskursmonger.cli.CLIParser;
 import com.github.diskursmonger.domain.config.AppConfig;
 import com.github.diskursmonger.domain.exception.ValidationException;
 import com.github.diskursmonger.domain.validation.ValidatorFactory;
+import com.github.diskursmonger.filtering.FileFilterService;
 import picocli.CommandLine;
 
 public class ApplicationService {
@@ -14,9 +15,10 @@ public class ApplicationService {
         try {
             cmd.parseArgs(args);
             AppConfig appConfig = cliParser.toConfig();
-            var validatorFactory = new ValidatorFactory();
-            var validatorService = new ValidatorService(validatorFactory.create());
+            var validatorService = new ValidatorService(ValidatorFactory.create());
             validatorService.validate(appConfig);
+            var fileFilterService = new FileFilterService();
+            fileFilterService.run(appConfig);
         } catch (CommandLine.ParameterException e) {
             System.err.println("Arguments error: " + e.getMessage());
             System.exit(2);
