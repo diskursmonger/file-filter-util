@@ -6,6 +6,7 @@ import com.github.diskursmonger.domain.config.AppConfig;
 import com.github.diskursmonger.domain.statistics.collectors.StatisticsCollectorFactory;
 import com.github.diskursmonger.filtering.io.InputManager;
 import com.github.diskursmonger.filtering.io.OutputManager;
+import com.github.diskursmonger.filtering.report.ConsoleStatisticsReporter;
 
 import java.io.IOException;
 
@@ -23,6 +24,8 @@ public class FileFilterService {
                 outputManager.write(line, type);
                 statisticsCollector.update(line, type);
             }
+            ConsoleStatisticsReporter statisticsReporter = new ConsoleStatisticsReporter(appConfig.statisticsMode());
+            statisticsReporter.report(statisticsCollector);
         }
     }
 }
