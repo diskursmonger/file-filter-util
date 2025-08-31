@@ -7,6 +7,8 @@ import com.github.diskursmonger.domain.validation.ValidatorFactory;
 import com.github.diskursmonger.filtering.FileFilterService;
 import picocli.CommandLine;
 
+import java.io.IOException;
+
 public class ApplicationService {
     public static void execute(String[] args) {
         var cliParser = new CLIParser();
@@ -25,6 +27,9 @@ public class ApplicationService {
         } catch (ValidationException e) {
             System.err.println("Arguments error: " + e.getMessage());
             System.exit(3);
+        } catch (IOException e) {
+            System.err.println("I/O error: " + e.getMessage());
+            System.exit(4);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
