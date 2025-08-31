@@ -18,34 +18,51 @@ public class ConsoleStatisticsReporter implements StatisticsReporter {
         var integers = statisticsCollector.getStatisticsData().getIntegers();
         var floats = statisticsCollector.getStatisticsData().getFloats();
         var strings = statisticsCollector.getStatisticsData().getStrings();
-        if (statisticsMode == StatisticsMode.SHORT) {
-            System.out.println("===SHORT STATISTICS===");
-            System.out.println("Integers amount: " + integers.getAmount());
-            System.out.println("Floats amount: " + floats.getAmount());
-            System.out.println("Strings amount: " + strings.getAmount());
+        if (integers.getAmount() == 0 && floats.getAmount() == 0 && strings.getAmount() == 0) {
+            System.out.println("Nothing was written to files.");
             return;
         }
-        System.out.println("===FULL STATISTICS===");
-        System.out.println("_Integers_");
-        System.out.println("Amount: " + integers.getAmount() + ", " +
-                "min: " + integers.getMin() + ", " +
-                "max: " + integers.getMax() + ", " +
-                "sum: " + integers.getSum() + ", " +
-                "average: " + integers.average()
-        );
+        if (statisticsMode == StatisticsMode.SHORT) {
+            System.out.println("===SHORT STATISTICS===");
+            if (integers.getAmount() != 0) {
+                System.out.println("Integers amount: " + integers.getAmount());
+                if (floats.getAmount() != 0) {
+                    System.out.println("Floats amount: " + floats.getAmount());
+                }
+                if (strings.getAmount() != 0) {
+                    System.out.println("Strings amount: " + strings.getAmount());
+                }
+                return;
+            }
+            System.out.println("===FULL STATISTICS===");
+            if (integers.getAmount() != 0) {
+                System.out.println("_Integers_");
+                System.out.println("Amount: " + integers.getAmount() + ", " +
+                        "min: " + integers.getMin() + ", " +
+                        "max: " + integers.getMax() + ", " +
+                        "sum: " + integers.getSum() + ", " +
+                        "average: " + integers.average()
+                );
+            }
 
-        System.out.println("\n_Floats_");
-        System.out.println("Amount: " + floats.getAmount() + ", " +
-                "min: " + floats.getMin() + ", " +
-                "max: " + floats.getMax() + ", " +
-                "sum: " + floats.getSum() + ", " +
-                "average: " + floats.average()
-        );
+            if (floats.getAmount() != 0) {
+                System.out.println("\n_Floats_");
+                System.out.println("Amount: " + floats.getAmount() + ", " +
+                        "min: " + floats.getMin() + ", " +
+                        "max: " + floats.getMax() + ", " +
+                        "sum: " + floats.getSum() + ", " +
+                        "average: " + floats.average()
+                );
+            }
 
-        System.out.println("\n_Strings_");
-        System.out.println("Amount: " + strings.getAmount() + ", " +
-                "min length: " + integers.getMin() + ", " +
-                "max length: " + integers.getMax()
-        );
+            if (strings.getAmount() != 0) {
+                System.out.println("\n_Strings_");
+                System.out.println("Amount: " + strings.getAmount() + ", " +
+                        "min length: " + integers.getMin() + ", " +
+                        "max length: " + integers.getMax()
+                );
+            }
+
+        }
     }
 }
