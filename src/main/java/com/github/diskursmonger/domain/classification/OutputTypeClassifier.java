@@ -3,7 +3,7 @@ package com.github.diskursmonger.domain.classification;
 import java.util.regex.Pattern;
 
 public class OutputTypeClassifier {
-    private static final Pattern INTEGER_PATTERN = Pattern.compile("^-?\\d+$");
+    private static final Pattern INTEGER_PATTERN = Pattern.compile("^[+-]?\\d+$");
     private static final Pattern FLOAT_PATTERN = Pattern.compile("^[+-]?\\d*\\.?\\d+([eE][+-]?\\d+)?$");
 
     public static OutputType classify(String line) {

@@ -44,8 +44,8 @@ public final class CLIParser {
             inputFilesNormalized.add(inputFile.toAbsolutePath().normalize());
         }
 
-        StatisticsMode statisticsMode = statisticsFlags.shortStatistics ? StatisticsMode.SHORT :
-                statisticsFlags.fullStatistics ? StatisticsMode.FULL : StatisticsMode.NONE;
+        StatisticsMode statisticsMode = statisticsFlags == null ? StatisticsMode.NONE :
+                statisticsFlags.shortStatistics ? StatisticsMode.SHORT : StatisticsMode.FULL;
 
         return new AppConfig(
                 path,
