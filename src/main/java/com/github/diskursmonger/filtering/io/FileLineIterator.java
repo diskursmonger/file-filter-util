@@ -1,17 +1,16 @@
 package com.github.diskursmonger.filtering.io;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
 public class FileLineIterator implements Iterator<String>, AutoCloseable {
-    final Path path;
-    final Stream<String> stream;
-    final Iterator<String> it;
-    FileLineIterator(Path path, Stream<String> stream) {
-        this.path = path;
-        this.stream = stream;
+    private final Stream<String> stream;
+    private final Iterator<String> it;
+    FileLineIterator(Path path) throws IOException {
+        this.stream = Files.lines(path);
         this.it = stream.iterator();
     }
 
@@ -26,11 +25,11 @@ public class FileLineIterator implements Iterator<String>, AutoCloseable {
 
     @Override
     public boolean hasNext() {
-        return false;
+        return it.hasNext();
     }
 
     @Override
     public String next() {
-        return null;
+        return it.next();
     }
 }

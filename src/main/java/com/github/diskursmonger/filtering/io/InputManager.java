@@ -13,13 +13,27 @@ public class InputManager implements AutoCloseable {
     public InputManager(List<Path> inputFiles) {
         this.inputFiles = List.copyOf(inputFiles);
     }
-    public void open() {
-
+    public void open() throws IOException {
+        for (var file : inputFiles) {
+            try {
+                var fileLineIterator = new FileLineIterator(file);
+                q.addLast(fileLineIterator);
+            } catch (IOException e) {
+                throw new IOException("Can't open input file: " + file, e);
+            }
+        }
     }
 
-    public String readLine() {
+    public String readLine() throws IOException{
         while (!q.isEmpty()) {
-
+            var it = q.pollFirst();
+            if (it.hasNext()) {
+                String line = it.next();
+                q.addLast(it);
+                return line;
+            } else {
+                it.close();
+            }
         }
         return null;
     }
