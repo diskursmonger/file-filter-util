@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 public class FileLineIterator implements Iterator<String>, AutoCloseable {
     private final Stream<String> stream;
     private final Iterator<String> it;
+
     FileLineIterator(Path path) throws IOException {
         this.stream = Files.lines(path);
         this.it = stream.iterator();

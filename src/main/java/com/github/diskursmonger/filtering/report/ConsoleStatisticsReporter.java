@@ -34,35 +34,34 @@ public class ConsoleStatisticsReporter implements StatisticsReporter {
                 }
                 return;
             }
-            System.out.println("===FULL STATISTICS===");
-            if (integers.getAmount() != 0) {
-                System.out.println("_Integers_");
-                System.out.println("Amount: " + integers.getAmount() + ", " +
-                        "min: " + integers.getMin() + ", " +
-                        "max: " + integers.getMax() + ", " +
-                        "sum: " + integers.getSum() + ", " +
-                        "average: " + integers.average()
-                );
-            }
+        }
+        System.out.println("===FULL STATISTICS===");
+        if (integers.getAmount() != 0) {
+            System.out.println("_Integers_");
+            System.out.println("Amount: " + integers.getAmount() + ", " +
+                    "min: " + integers.getMin() + ", " +
+                    "max: " + integers.getMax() + ", " +
+                    "sum: " + integers.getSum() + ", " +
+                    "average: " + integers.average()
+            );
+        }
 
-            if (floats.getAmount() != 0) {
-                System.out.println("\n_Floats_");
-                System.out.println("Amount: " + floats.getAmount() + ", " +
-                        "min: " + floats.getMin() + ", " +
-                        "max: " + floats.getMax() + ", " +
-                        "sum: " + floats.getSum() + ", " +
-                        "average: " + floats.average()
-                );
-            }
+        if (floats.getAmount() != 0) {
+            System.out.println("\n_Floats_");
+            System.out.println("Amount: " + floats.getAmount() + ", " +
+                    "min: " + floats.getMin() + ", " +
+                    "max: " + floats.getMax() + ", " +
+                    "sum: " + floats.getSum() + ", " +
+                    "average: " + floats.average()
+            );
+        }
 
-            if (strings.getAmount() != 0) {
-                System.out.println("\n_Strings_");
-                System.out.println("Amount: " + strings.getAmount() + ", " +
-                        "min length: " + integers.getMin() + ", " +
-                        "max length: " + integers.getMax()
-                );
-            }
-
+        if (strings.getAmount() != 0) {
+            System.out.println("\n_Strings_");
+            System.out.println("Amount: " + strings.getAmount() + ", " +
+                    "min length: " + integers.getMin() + ", " +
+                    "max length: " + integers.getMax()
+            );
         }
     }
 }

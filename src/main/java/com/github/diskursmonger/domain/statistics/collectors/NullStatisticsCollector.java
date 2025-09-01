@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class NullStatisticsCollector implements StatisticsCollector {
     StatisticsData statisticsData;
+
     @Override
     public void update(String line, OutputType type) {
 

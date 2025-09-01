@@ -11,7 +11,7 @@ public class IntegerStatistics {
     long amount;
     BigInteger min;
     BigInteger max;
-    BigInteger sum;
+    BigInteger sum = BigInteger.ZERO;
 
     public BigDecimal average() {
         if (amount == 0) {

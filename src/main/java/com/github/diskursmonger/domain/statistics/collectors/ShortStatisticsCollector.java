@@ -11,6 +11,7 @@ public class ShortStatisticsCollector implements StatisticsCollector {
     public ShortStatisticsCollector() {
         this.statisticsData = new StatisticsData();
     }
+
     @Override
     public void update(String line, OutputType type) {
         switch (type) {

@@ -13,6 +13,7 @@ public class InputManager implements AutoCloseable {
     public InputManager(List<Path> inputFiles) {
         this.inputFiles = List.copyOf(inputFiles);
     }
+
     public void open() throws IOException {
         for (var file : inputFiles) {
             try {
@@ -24,7 +25,7 @@ public class InputManager implements AutoCloseable {
         }
     }
 
-    public String readLine() throws IOException{
+    public String readLine() throws IOException {
         while (!q.isEmpty()) {
             var it = q.pollFirst();
             if (it.hasNext()) {
@@ -37,6 +38,7 @@ public class InputManager implements AutoCloseable {
         }
         return null;
     }
+
     @Override
     public void close() throws IOException {
         IOException eThrown = null;

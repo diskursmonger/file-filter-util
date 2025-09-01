@@ -15,7 +15,7 @@ public class FileFilterService {
         var statisticsCollector = StatisticsCollectorFactory.create(appConfig.statisticsMode());
 
         try (InputManager inputManager = new InputManager(appConfig.inputFiles());
-            OutputManager outputManager = new OutputManager(appConfig)) {
+             OutputManager outputManager = new OutputManager(appConfig)) {
             inputManager.open();
 
             String line;
