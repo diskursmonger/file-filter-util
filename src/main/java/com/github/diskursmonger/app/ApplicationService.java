@@ -5,6 +5,7 @@ import com.github.diskursmonger.domain.config.AppConfig;
 import com.github.diskursmonger.domain.exception.ValidationException;
 import com.github.diskursmonger.domain.validation.ValidatorFactory;
 import com.github.diskursmonger.filtering.FileFilterService;
+import com.github.diskursmonger.filtering.exception.FileOperationException;
 import picocli.CommandLine;
 
 import java.io.IOException;
@@ -27,9 +28,15 @@ public class ApplicationService {
         } catch (ValidationException e) {
             System.err.println("Arguments error: " + e.getMessage());
             System.exit(3);
+        } catch (OutOfMemoryError e) {
+            System.err.println("Out of memory error: " + e.getMessage());
+            System.exit(4);
+        } catch (FileOperationException e) {
+            System.err.println("I/O error: " + e.getMessage());
+            System.exit(5);
         } catch (IOException e) {
             System.err.println("I/O error: " + e.getMessage());
-            System.exit(4);
+            System.exit(6);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

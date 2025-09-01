@@ -2,6 +2,7 @@ package com.github.diskursmonger.filtering.io;
 
 import com.github.diskursmonger.domain.classification.OutputType;
 import com.github.diskursmonger.domain.config.AppConfig;
+import com.github.diskursmonger.filtering.exception.FileOperationException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -28,8 +29,12 @@ public class OutputManager implements AutoCloseable {
 
     public void write(String line, OutputType type) throws IOException {
         var writer = getWriter(type);
-        writer.write(line);
-        writer.newLine();
+        try {
+            writer.write(line);
+            writer.newLine();
+        } catch (IOException e) {
+            throw new FileOperationException("Can't write to a file.");
+        }
     }
 
     private BufferedWriter getWriter(OutputType type) throws IOException {
@@ -41,11 +46,15 @@ public class OutputManager implements AutoCloseable {
     }
 
     private BufferedWriter openWriter(Path path) throws IOException {
-        Path parent = path.getParent();
-        if (parent != null) {
-            Files.createDirectories(parent);
+        try {
+            Path parent = path.getParent();
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
+            return new BufferedWriter(new FileWriter(path.toFile(), append));
+        } catch (IOException e) {
+            throw new FileOperationException("Can't open output file: " + path, e);
         }
-        return new BufferedWriter(new FileWriter(path.toFile(), append));
     }
 
     private BufferedWriter getIntegersWriter() throws IOException {
@@ -76,21 +85,21 @@ public class OutputManager implements AutoCloseable {
             try {
                 integersWriter.close();
             } catch (IOException e) {
-                eThrown = new IOException("Can't close output file: " + integers, e);
+                eThrown = new FileOperationException("Can't close output file: " + integers, e);
             }
         }
         if (floatsWriter != null) {
             try {
                 floatsWriter.close();
             } catch (IOException e) {
-                eThrown = new IOException("Can't close output file: " + floats, e);
+                eThrown = new FileOperationException("Can't close output file: " + floats, e);
             }
         }
         if (stringsWriter != null) {
             try {
                 stringsWriter.close();
             } catch (IOException e) {
-                eThrown = new IOException("Can't close output file: " + strings, e);
+                eThrown = new FileOperationException("Can't close output file: " + strings, e);
             }
         }
         if (eThrown != null) {

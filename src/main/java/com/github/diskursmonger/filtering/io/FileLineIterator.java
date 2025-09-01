@@ -1,5 +1,7 @@
 package com.github.diskursmonger.filtering.io;
 
+import com.github.diskursmonger.filtering.exception.FileOperationException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,8 +13,12 @@ public class FileLineIterator implements Iterator<String>, AutoCloseable {
     private final Iterator<String> it;
 
     FileLineIterator(Path path) throws IOException {
-        this.stream = Files.lines(path);
-        this.it = stream.iterator();
+        try {
+            this.stream = Files.lines(path);
+            this.it = stream.iterator();
+        } catch (IOException e) {
+            throw new FileOperationException("Can't open input stream: ", e);
+        }
     }
 
     @Override
@@ -20,7 +26,7 @@ public class FileLineIterator implements Iterator<String>, AutoCloseable {
         try {
             stream.close();
         } catch (RuntimeException e) {
-            throw new IOException("Can't close stream: ", e);
+            throw new FileOperationException("Can't close input stream: ", e);
         }
     }
 

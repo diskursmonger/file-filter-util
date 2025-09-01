@@ -1,5 +1,7 @@
 package com.github.diskursmonger.filtering.io;
 
+import com.github.diskursmonger.filtering.exception.FileOperationException;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayDeque;
@@ -20,20 +22,25 @@ public class InputManager implements AutoCloseable {
                 var fileLineIterator = new FileLineIterator(file);
                 q.addLast(fileLineIterator);
             } catch (IOException e) {
-                throw new IOException("Can't open input file: " + file, e);
+                throw new FileOperationException("Can't open input file: " + file, e);
             }
         }
     }
 
     public String readLine() throws IOException {
         while (!q.isEmpty()) {
-            var it = q.pollFirst();
-            if (it.hasNext()) {
-                String line = it.next();
-                q.addLast(it);
-                return line;
-            } else {
-                it.close();
+            var it = q.peekFirst();
+            try {
+                if (it.hasNext()) {
+                    String line = it.next();
+                    q.addLast(q.pollFirst());
+                    return line;
+                } else {
+                    q.pollFirst();
+                    it.close();
+                }
+            } catch (IOException e) {
+                throw new FileOperationException("Can't read next line: ", e);
             }
         }
         return null;
@@ -46,7 +53,7 @@ public class InputManager implements AutoCloseable {
             try {
                 q.pollFirst().close();
             } catch (IOException e) {
-                eThrown = new IOException("Can't close input file: ", e);
+                eThrown = new FileOperationException("Can't close input file: ", e);
             }
         }
         if (eThrown != null) {
