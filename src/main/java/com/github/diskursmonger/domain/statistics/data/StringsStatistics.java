@@ -14,10 +14,10 @@ public class StringsStatistics {
     }
 
     public void updateFullStatistics(String value) {
-        if (minLength > value.length()) {
+        if (minLength == 0 || minLength > value.length()) {
             minLength = value.length();
         }
-        if (maxLength < value.length()) {
+        if (maxLength == 0 || maxLength < value.length()) {
             maxLength = value.length();
         }
     }

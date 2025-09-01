@@ -33,17 +33,11 @@ public class OutputManager implements AutoCloseable {
     }
 
     private BufferedWriter getWriter(OutputType type) throws IOException {
-        switch (type) {
-            case INTEGER -> {
-                return getIntegersWriter();
-            }
-            case FLOAT -> {
-                return getFloatsWriter();
-            }
-            default -> {
-                return getStringsWriter();
-            }
-        }
+        return switch (type) {
+            case INTEGER -> getIntegersWriter();
+            case FLOAT   -> getFloatsWriter();
+            case STRING  -> getStringsWriter();
+        };
     }
 
     private BufferedWriter openWriter(Path path) throws IOException {

@@ -3,8 +3,8 @@ package com.github.diskursmonger.domain.classification;
 import java.util.regex.Pattern;
 
 public class OutputTypeClassifier {
-    private static final Pattern INTEGER_PATTERN = Pattern.compile("^[1-9][0-9]*$");
-    private static final Pattern FLOAT_PATTERN = Pattern.compile("\"-?(?:\\\\d+(?:\\\\.\\\\d+)?|\\\\.\\\\d+)\"");
+    private static final Pattern INTEGER_PATTERN = Pattern.compile("^-?\\d+$");
+    private static final Pattern FLOAT_PATTERN = Pattern.compile("^[+-]?\\d*\\.?\\d+([eE][+-]?\\d+)?$");
 
     public static OutputType classify(String line) {
         if (INTEGER_PATTERN.matcher(line).matches()) {

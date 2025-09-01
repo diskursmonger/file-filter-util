@@ -59,8 +59,8 @@ public class ConsoleStatisticsReporter implements StatisticsReporter {
         if (strings.getAmount() != 0) {
             System.out.println("\n_Strings_");
             System.out.println("Amount: " + strings.getAmount() + ", " +
-                    "min length: " + integers.getMin() + ", " +
-                    "max length: " + integers.getMax()
+                    "min length: " + strings.getMinLength() + ", " +
+                    "max length: " + strings.getMaxLength()
             );
         }
     }
