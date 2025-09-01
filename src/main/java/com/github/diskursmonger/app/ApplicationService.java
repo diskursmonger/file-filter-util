@@ -23,19 +23,19 @@ public class ApplicationService {
             var fileFilterService = new FileFilterService();
             fileFilterService.run(appConfig);
         } catch (CommandLine.ParameterException e) {
-            System.err.println("Arguments error: " + e.getMessage());
+            System.err.println("Impossible to continue: arguments error. " + e.getMessage());
             System.exit(2);
         } catch (ValidationException e) {
-            System.err.println("Arguments error: " + e.getMessage());
+            System.err.println("Impossible to continue: arguments error. " + e.getMessage());
             System.exit(3);
         } catch (OutOfMemoryError e) {
-            System.err.println("Out of memory error: " + e.getMessage());
+            System.err.println("Impossible to continue: Out of memory error. " + e.getMessage());
             System.exit(4);
         } catch (FileOperationException e) {
-            System.err.println("I/O error: " + e.getMessage());
+            System.err.println("Impossible to continue: I/O error. " + e.getMessage());
             System.exit(5);
         } catch (IOException e) {
-            System.err.println("I/O error: " + e.getMessage());
+            System.err.println("Impossible to continue: I/O error. " + e.getMessage());
             System.exit(6);
         } catch (Exception e) {
             e.printStackTrace();
