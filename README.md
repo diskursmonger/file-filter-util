@@ -11,7 +11,7 @@ Picocli 4.7.7 'info.picocli:picocli:4.7.7'
 
 Picocli CodeGen 4.7.7 'info.picocli:picocli-codegen:4.7.7'
 
-ShadowJar 8.1.1 https://gradleup.com/shadow/
+ShadowJar 8.1.1 'com.github.johnrengelman.shadow' version '8.1.1'
 
 
 ## Инструкция по запуску
